@@ -28,7 +28,7 @@ $ npm install
 $ npm run search
 ```
 
-Once done, navigate to [http://localhost:3000]
+If browser doesn't open on it's own please navigate to [http://localhost:3000]
 
 For running tests...
 

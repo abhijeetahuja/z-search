@@ -1,5 +1,6 @@
 const express = require('express');
 const winston = require('winston');
+const opn = require('opn');
 const UserService = require('../src/services/user');
 const TicketService = require('../src/services/ticket');
 const OrgService = require('../src/services/organization');
@@ -45,6 +46,9 @@ app.use((err, req, res, next) => {
 });
 
 // start the server at port 3000.
-app.listen(config.port, () => {
-    winston.info(`Server started at port ${config.port}`);
+const { port } = config;
+app.listen(port, () => {
+    winston.info(`Server started at port ${port}`);
+    opn(`http://localhost:${port}`);
 });
+
