@@ -10,6 +10,10 @@ class User {
         this.organizations = organizations;
     }
 
+    getAttributes() {
+        return Object.keys(this.users[0]);
+    }
+
     prepareResponse(filteredUsers) {
         return filteredUsers.map((user) => {
             const org = this.organizations.find(organization => organization._id === user.organization_id);

@@ -10,6 +10,10 @@ class Ticket {
         this.organizations = organizations;
     }
 
+    getAttributes() {
+        return Object.keys(this.tickets[0]);
+    }
+
     prepareResponse(filteredTickets) {
         return filteredTickets.map((ticket) => {
             const assignee = this.users.find(user => ticket.assignee_id === user._id);

@@ -10,6 +10,10 @@ class Organization {
         this.organizations = organizations;
     }
 
+    getAttributes() {
+        return Object.keys(this.organizations[0]);
+    }
+
     prepareResponse(filteredOrgs) {
         return filteredOrgs.map(org => Object.assign(
             {}, org,
