@@ -1,0 +1,28 @@
+{
+  "name": "zendesk-search",
+  "version": "1.0.0",
+  "description": "Search users, tickets, or organizations",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "search",
+    "users",
+    "tickets",
+    "organizations",
+    "zendesk"
+  ],
+  "author": "Abhijeet Ahuja",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "jest": "^22.1.4"
+  }
+}
