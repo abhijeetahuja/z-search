@@ -1,12 +1,15 @@
 const express = require('express');
+const winston = require('winston');
 const UserService = require('../src/services/user');
 const TicketService = require('../src/services/ticket');
 const OrgService = require('../src/services/organization');
+const config = require('./env');
 
 const app = express();
 
 // user search routes
 app.get('/users', (req, res) => {
+    winston.debug('request received for /users');
     res.json(UserService.search(req.query));
 });
 
@@ -35,5 +38,13 @@ app.get('/orgs/attributes', (req, res) => {
 // serve static files.
 app.use(express.static('dist'));
 
+// default error handler
+app.use((err, req, res, next) => {
+    winston.error(err.stack);
+    res.status(500).send('Please try again later');
+});
+
 // start the server at port 3000.
-app.listen(3000, () => console.log('Search app started on port 3000'));
+app.listen(config.port, () => {
+    winston.info(`Server started at port ${config.port}`);
+});
