@@ -11,7 +11,8 @@ class Ticket {
     }
 
     getAttributes() {
-        return Object.keys(this.tickets[0]);
+        // need to iterate all the objects to find all possible search keys
+        return this.tickets.reduce((s, o) => [...new Set([...s, ...Object.keys(o)])], []);
     }
 
     prepareResponse(filteredTickets) {
@@ -29,7 +30,7 @@ class Ticket {
     }
 
     search(filterObj) {
-        // normalize input strings
+        // normalize input strings as query params are always string
         const normalizedFilterObj = Object.assign(
             {}, filterObj,
             filterObj.has_incidents && { has_incidents: filterObj.has_incidents === 'true' },
@@ -39,6 +40,7 @@ class Ticket {
         );
 
         if (normalizedFilterObj.tags) {
+            // handle search for array properties
             const normalizedTags = [].concat(normalizedFilterObj.tags);
             return this.prepareResponse(_.filter(this.tickets, ticket => !normalizedTags.some(val => ticket.tags.indexOf(val) === -1)));
         }

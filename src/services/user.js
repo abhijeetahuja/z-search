@@ -11,7 +11,8 @@ class User {
     }
 
     getAttributes() {
-        return Object.keys(this.users[0]);
+        // need to iterate all the objects to find all possible search keys
+        return this.users.reduce((s, o) => [...new Set([...s, ...Object.keys(o)])], []);
     }
 
     prepareResponse(filteredUsers) {
@@ -26,7 +27,7 @@ class User {
     }
 
     search(filterObj) {
-        // normalize input strings
+        // normalize input strings as query params are always string
         const normalizedFilterObj = Object.assign(
             {}, filterObj,
             filterObj.active && { active: filterObj.active === 'true' },
@@ -39,6 +40,7 @@ class User {
         );
 
         if (normalizedFilterObj.tags) {
+            // handle search for array properties
             const normalizedTags = [].concat(normalizedFilterObj.tags);
             return this.prepareResponse(_.filter(this.users, user => !normalizedTags.some(val => user.tags.indexOf(val) === -1)));
         }

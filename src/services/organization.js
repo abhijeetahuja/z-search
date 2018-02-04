@@ -11,7 +11,8 @@ class Organization {
     }
 
     getAttributes() {
-        return Object.keys(this.organizations[0]);
+        // need to iterate all the objects to find all possible search keys
+        return this.organizations.reduce((s, o) => [...new Set([...s, ...Object.keys(o)])], []);
     }
 
     prepareResponse(filteredOrgs) {
@@ -23,7 +24,7 @@ class Organization {
     }
 
     search(filterObj) {
-        // normalize input strings
+        // normalize input strings as query params are always string
         const normalizedFilterObj = Object.assign(
             {}, filterObj,
             filterObj.shared_tickets && { shared_tickets: filterObj.shared_tickets === 'true' },
@@ -31,11 +32,13 @@ class Organization {
         );
 
         if (normalizedFilterObj.tags) {
+            // handle search for array properties
             const normalizedTags = [].concat(normalizedFilterObj.tags);
             return this.prepareResponse(_.filter(this.organizations, org => !normalizedTags.some(val => org.tags.indexOf(val) === -1)));
         }
 
         if (normalizedFilterObj.domain_names) {
+            // handle search for array properties
             const normalizedDomainNames = [].concat(normalizedFilterObj.domain_names);
             return this.prepareResponse(_.filter(this.organizations, org => !normalizedDomainNames.some(val => org.domain_names.indexOf(val) === -1)));
         }

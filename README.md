@@ -35,6 +35,16 @@ For running tests...
 ```sh
 $ npm test
 ```
+
+### How to search?
+- Select one of the three options - Users or Tickets or Organizations (browser will fetch all possible search attributes)
+- Select one of the search attributes. For example _id or name
+- Key in the search value (for example 11) and hit search button.
+
+### Providing inputs?
+
+Place data in ./inputs/[users/tickets/organizations].json
+
    [node.js]: <http://nodejs.org>
    [react]: <https://reactjs.org/>
    [express]: <http://expressjs.com>
@@ -42,3 +52,4 @@ $ npm test
    [webpack]: <https://webpack.js.org/>
    [jest]: <https://facebook.github.io/jest/>
    [http://localhost:3000]: <http://localhost:3000>
+
